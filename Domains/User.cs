@@ -1,8 +1,15 @@
-﻿namespace _531WorkoutApi.Domains;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace _531WorkoutApi.Domains;
 
 public class User
 {
-    public Guid userId { get; set; }
+    [Required]
+    public Guid UserId { get; set; }
+    
+    [MaxLength(50)]
     public string Username { get; set; }
+    
+    [MaxLength(50)]
     public string PasswordHash { get; set; }
 }

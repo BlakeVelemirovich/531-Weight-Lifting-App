@@ -1,4 +1,5 @@
 using _531WorkoutApi.DataContext;
+using _531WorkoutApi.Repositories;
 using _531WorkoutApi.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,8 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 // Services
-builder.Services.AddScoped<IHelloWorldService, HelloWorldService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+// Repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // DB Context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

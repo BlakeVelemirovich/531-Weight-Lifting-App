@@ -88,19 +88,21 @@ namespace _531WorkoutApi.Migrations
 
             modelBuilder.Entity("_531WorkoutApi.Domains.User", b =>
                 {
-                    b.Property<Guid>("userId")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
-                    b.HasKey("userId");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
