@@ -1,0 +1,6 @@
+@_531WorkoutApi_HostAddress = http://localhost:5242
+
+GET {{_531WorkoutApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
