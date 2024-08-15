@@ -21,4 +21,7 @@
   <ItemGroup>
     <Compile Include="./DataContext/ApplicationDbContext.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove=".env" />
+  </ItemGroup>
 </Project>
