@@ -5,4 +5,6 @@ namespace _531WorkoutApi.Repositories;
 public interface IUserRepository
 {
     Task AddAsync(User request);
+
+    Task<User> SearchUserAsync(string username);
 }

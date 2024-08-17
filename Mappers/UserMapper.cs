@@ -10,5 +10,8 @@ public class UserMapper : Profile
     {
         CreateMap<UserRequestDto, User>()
             .ForMember(dest => dest.UserId, opt => opt.Ignore());
+
+        CreateMap<User, UserDto>()
+            .ReverseMap();
     }
 }

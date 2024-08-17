@@ -10,6 +10,6 @@ public class User
     [MaxLength(50)]
     public string Username { get; set; }
     
-    [MaxLength(50)]
+    [MaxLength(128)]
     public string PasswordHash { get; set; }
 }

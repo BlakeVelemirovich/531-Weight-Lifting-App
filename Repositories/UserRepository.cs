@@ -1,5 +1,6 @@
 ﻿using _531WorkoutApi.DataContext;
 using _531WorkoutApi.Domains;
+using Microsoft.EntityFrameworkCore;
 
 namespace _531WorkoutApi.Repositories;
 
@@ -16,5 +17,14 @@ public class UserRepository: IUserRepository
     {
         _context.Users.Add(request);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<User> SearchUserAsync(string username)
+    {
+        User user = _context.Users
+            .Single(user => user.Username == username);
+
+        if (user != null || user.UserId != Guid.Empty) return user;
+        return new User();
     }
 }
