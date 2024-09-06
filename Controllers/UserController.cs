@@ -9,24 +9,36 @@ namespace _531WorkoutApi.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly ILogger<UserController> _logger;
 
-    public UserController(IUserService userService)
+    public UserController(
+        IUserService userService,
+        ILogger<UserController> logger
+    )
     {
         _userService = userService;
+        _logger = logger;
     }
-
-    // POST: api/user
+    
     [HttpPost("register")]
     public async Task<IActionResult> RegisterPost([FromBody] UserRequestDto request)
     {
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        
         try
         {
             await _userService.AddAsync(request);
-            return Ok("User Successfully Registered.");
+            return Ok("User Successfully Registered."); 
         }
         catch (Exception e)
         {
-            return BadRequest(e.Message);
+            _logger.LogError(e, "An error occurred when registering a user. UserRequest: {@UserRequest}", request);
+            
+            return BadRequest("There was an error when registering the user.");
         }
     }
     
