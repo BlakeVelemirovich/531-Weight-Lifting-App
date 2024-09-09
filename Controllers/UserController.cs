@@ -1,4 +1,5 @@
 ﻿using _531WorkoutApi.DTO;
+using _531WorkoutApi.Exceptions;
 using _531WorkoutApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,11 +29,23 @@ public class UserController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        
+
         try
         {
             await _userService.AddAsync(request);
-            return Ok("User Successfully Registered."); 
+            return Ok("User Successfully Registered.");
+        }
+        catch (DuplicateUsername e)
+        {
+            _logger.LogError(e, "Registering user error: Duplicate username: {@Username}", request.Username);
+
+            return BadRequest("Username already exists.");
+        }
+        catch (PasswordMinimumReq e)
+        {
+            _logger.LogError(e, "Registering user error: Password doesn't not meet minimum requirements.");
+
+            return BadRequest("Password does not meet minimum requirements.");
         }
         catch (Exception e)
         {

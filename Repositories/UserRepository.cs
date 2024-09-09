@@ -32,4 +32,10 @@ public class UserRepository: IUserRepository
         if (user != null || user.UserId != Guid.Empty) return user;
         return new User();
     }
+
+    public async Task<bool> CheckUsernameDuplicateAsync(string username)
+    {
+        return await _context.Users.AnyAsync(u => u.Username == username);
+    }
+    
 }

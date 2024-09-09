@@ -9,4 +9,6 @@ public interface IUserRepository
     Task<User> SearchUserAsync(string username);
 
     Task<bool> UserExistsAsync(Guid userId);
+
+    Task<bool> CheckUsernameDuplicateAsync(string username);
 }
