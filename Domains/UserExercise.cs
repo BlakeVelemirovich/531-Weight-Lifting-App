@@ -7,5 +7,5 @@ public class UserExercise {
     
     public int CurrentWeek { get; set; }
     
-    public float OneRepMax { get; set; }
+    public double OneRepMax { get; set; }
 }

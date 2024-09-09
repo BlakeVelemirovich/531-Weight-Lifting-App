@@ -19,6 +19,11 @@ public class UserRepository: IUserRepository
         await _context.SaveChangesAsync();
     }
 
+    public async Task<bool> UserExistsAsync(Guid userId)
+    {
+        return await _context.Users.AnyAsync(u => u.UserId == userId);
+    }
+
     public async Task<User> SearchUserAsync(string username)
     {
         User user = _context.Users

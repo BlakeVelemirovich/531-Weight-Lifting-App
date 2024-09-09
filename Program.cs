@@ -1,4 +1,5 @@
 using _531WorkoutApi.DataContext;
+using _531WorkoutApi.Helpers;
 using _531WorkoutApi.Repositories;
 using _531WorkoutApi.Services;
 using dotenv.net;
@@ -23,9 +24,14 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 // Services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IExerciseService, ExerciseService>();
 
 // Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
+
+// Helpers
+builder.Services.AddScoped<ExerciseCalculator>();
 
 // DB Context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

@@ -1,3 +1,4 @@
+using _531WorkoutApi.Domains;
 using _531WorkoutApi.DTO;
 using _531WorkoutApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -21,15 +22,13 @@ public class ExerciseController: ControllerBase
     }
 
     [HttpGet("max_weight")]
-    public async Task<IActionResult> MaxWeightGet(
-        [FromQuery] Guid userId, 
-        [FromQuery] Guid exerciseId,
-        [FromQuery] float maxWeight
-        )
+    public async Task<IActionResult> MaxWeightGet([FromQuery] UserExerciseRequest request)
     {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+        
         try
         {
-            var workoutSet = _exerciseService.AddNewMaxWeightAsync(userId, exerciseId, maxWeight);
+            var workoutSet = await _exerciseService.AddNewMaxWeightAsync(request);
             return Ok(workoutSet);
         }
         catch (Exception e)

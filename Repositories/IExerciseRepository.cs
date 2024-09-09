@@ -2,5 +2,7 @@ namespace _531WorkoutApi.Repositories;
 
 public interface IExerciseRepository
 {
-    Task<int> AddNewWeightMax(Guid userId, double weightMax);
+    Task<int> AddNewWeightMaxAsync(UserExercise userExercise);
+
+    Task<bool> ExerciseExistsAsync(Guid exerciseId);
 }
