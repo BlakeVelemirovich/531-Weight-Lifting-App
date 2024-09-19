@@ -60,7 +60,7 @@ public class UserService: IUserService
         }
 
         // At least 8 characters, one uppercase letter, one number
-        var passwordPattern = new Regex(@"^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$");
+        var passwordPattern = new Regex(@"^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$");
         if (!passwordPattern.IsMatch(password))
         {
             throw new PasswordMinimumReq();

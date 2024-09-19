@@ -33,7 +33,7 @@ public class UserController : ControllerBase
         try
         {
             await _userService.AddAsync(request);
-            return Ok("User Successfully Registered.");
+            return Ok(new { success = true, message = "User Successfully Registered."});
         }
         catch (DuplicateUsername e)
         {
@@ -65,11 +65,11 @@ public class UserController : ControllerBase
             switch (result)
             {
                 case AuthenticationResult.Authenticated:
-                    return Ok("User authenticated.");
+                    return Ok(new { success = true, message = "User authenticated."});
                 case AuthenticationResult.UserNotFound:
-                    return Ok("User not found");
+                    return Ok(new { success = true, message = "User not found"});
                 case AuthenticationResult.InvalidPassword:
-                    return Ok("Invalid password");
+                    return Ok(new { success = true, message = "Invalid password"});
             }
 
             return BadRequest("Internal Server Error: 500");
